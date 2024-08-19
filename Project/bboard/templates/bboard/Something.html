@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'bboard/style3.css' %}">
+        <meta charset="UTF-8">
+        <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
+      </head>
+      <body>
+        <div class="catalog">
+            {% block content %}
+            <h1>Список деталей {{model.name}}</h1>
+
+    <ul>
+
+    </ul>
+            {% for spare in spares  %}
+            <li>
+                <p>{{spare.name}}</p>
+            </li>
+            {% endfor %}
+            {% endblock %}
+        </div>
+
+        {% block content %}{% endblock %}
+        {% comment %}Блок в котором передют данные в шаблонах{% endcomment %}
+      {% csrf_token %}
+      {% comment %}токен CSRF{% endcomment %}
+      {% for bb in bbs %}{% endfor %}
+      {% comment %}Цикл for in по передаваемым в контесте объектам{% endcomment %}
+      {% load static %}
+      {% comment %}Загружает необхдимое для работы со статическими файлами.{% endcomment %}
+      {% url 'bboard:index' parameters%}
+      {% comment %} Нужен для создания URL по различным маршрутам .{% endcomment %}
+      {% ifchanged %}{% endifchanged %}
+      {% comment %} Выполняет содержимое, только если значение изменилось.{% endcomment %}
+      {% if условие %}{% endif %}
+      {% comment %}Выполняет содержимое при выполнении условия бывает вариации
+        {% if условие %}{% else %}{% endif %}{% endcomment %}
+      {% cycle 'pos1' 'pos2' 'pos3' %}
+      {% comment %} Переключает значения в цикле..{% endcomment %}
+      {% forloop.counter %}
+      {% comment %} Выводит номер текущей итерации цикла с 1{% endcomment %}
+      </body>
+</html>

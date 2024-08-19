@@ -1,0 +1,21 @@
+{% extends "layout/basic.html" %}
+{% block title %}Добавление объявления{% endblock %}
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+            <p>{{field.label_tag}}<br>{{ field }}<br>{{ field.help_text }}</p>
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <ul>
+                        <li>{{ error|escape }}</li>
+                    </ul>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        <button type="submit">Создать</button>
+    </form>
+    <a href="{% url 'bboard:index' %}">Вернуться к списку</a>
+{% endblock %}

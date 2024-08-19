@@ -1,0 +1,22 @@
+{% extends "layout/basic.html" %}
+{% block content %}
+    {% for post in posts %}
+        <div>
+            <p><b>post on page: {{ forloop.counter}}</b></p>
+            <h2>{{post.title}}</h2>
+            <p>{{post.body}}</p>
+        </div>
+    {% endfor %}
+        <div>
+            {% for num in page_range %}
+                {% if num == page.number %}
+                    <b>{{num}}</b>
+                {% else %}
+                    <a href="?page={{num}}">{{num}}</a>
+                {% endif %}
+                {% if not forloop.last %}
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                {% endif %}
+        </div>
+    {% endfor %}
+{% endblock %}

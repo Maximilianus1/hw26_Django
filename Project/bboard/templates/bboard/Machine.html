@@ -1,0 +1,24 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'bboard/style3.css' %}">
+        <meta charset="UTF-8">
+        <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
+      </head>
+      <body>
+        <h1>Product List</h1>
+
+    {% regroup products by category as grouped_products %}
+
+    {% for category in grouped_products %}
+        <h2>{{ category.grouper }}</h2>
+        <ul>
+            {% for product in category.list %}
+                <li>{{ product.name }} - {{ product.price }}</li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+      </body>
+</html>

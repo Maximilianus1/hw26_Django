@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fruit Form</title>
+</head>
+<body>
+    <h1>Магические фрукты</h1>
+    <form method='post'>
+        {% csrf_token %}
+        {% for field in form.visible_fields %}
+            <p>{{field.label_tag}}<br>{{ field }}<br>{{ field.help_text }}</p>
+        {% endfor %}
+        <button type='submit'>Отправить</button>
+    </form>
+</body>

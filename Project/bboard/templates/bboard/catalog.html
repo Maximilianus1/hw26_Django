@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BboardList</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bboard/style2.css' %}">
+      </head>
+      <body></body>
+            {% block content %}
+            {% regroup bbs by published as grouped_bbs %}
+            {% for publish_group in grouped_bbs %}
+            <h2>{{ publish_group.grouper }}</h2>
+            <ul style="display:flex; ">
+                {% for bb in publish_group.list %}
+                <li ><div class="card">
+                    <h2 >Title: {{ bb.title }}</h2>
+                    <p >Content: {{bb.content}}</p>
+                    <p >Price: {{bb.price}}</p>
+                    <p >Published: {{ bb.published|date:"d.m.Y H:i:s" }}</p>
+                </div></li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+            {% endblock %}
+      </body>
+</html>

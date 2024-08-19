@@ -1,0 +1,35 @@
+{% extends "layout/basic.html" %}
+{% block title %}Добавление объявления{% endblock %}
+{% block content %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div style="display:flex; gap:3rem; flex-wrap:wrap; ">
+            {% for form in formset %}
+
+                <div style="border-radius:10px; border:1px solid black; padding:2rem;display:flex; flex-wrap:wrap; gap:2rem; width: 30rem;justify-content: space-between;">
+                {% for field in form.visible_fields %}
+                    <p>{{ field.label_tag }}<br>{{ field }}<br>{{ field.help_text }}</p>
+                    {% if field.errors %}
+                        <ul>
+                            {% for error in field.errors %}
+                                <li>{{ error|escape }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+                </div>
+
+            {% endfor %}
+            </div>
+        <button type="submit">Сохранить</button>
+        </form>
+        {% if formset.errors %}
+            <ul>
+                {% for error in formset.non_field_errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    <a href="{% url 'bboard:index' %}">Вернуться к списку</a>
+{% endblock %}

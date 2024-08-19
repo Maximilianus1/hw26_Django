@@ -1,0 +1,19 @@
+{% extends "layout/basic.html" %}
+{% block content %}
+    <p>URL главной страницы: {{ url1 }}</p>
+    {% for bb in bbs %}
+        <div>
+            <h2>{{ bb.title }}</h2>
+            <p>{{ bb.content }}</p>
+            {% comment %} <p><a href="{% url 'bboard:detail' bb.pk %}">{{ bb.title }}</a></p> {% endcomment %}
+
+
+            {% comment %} <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p> {% endcomment %}
+        </div>
+        <p>
+            {% for d in date_list %}
+                {{ d.year }}
+            {% endfor %}
+        </p>
+    {% endfor %}
+{% endblock %}
